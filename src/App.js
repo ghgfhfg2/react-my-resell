@@ -47,6 +47,33 @@ function App() {
     firebase.auth().signOut();
   };
 
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const joinToGoogle = () => {
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        let credential = result.credential;
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        let token = credential.accessToken;
+        // The signed-in user info.
+        let user = result.user;
+        console.log(credential, token, user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        // The email of the user's account used.
+        let email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        let credential = error.credential;
+        // ...
+      });
+  };
+
   return (
     <>
       <Layout className="layout">
@@ -58,7 +85,7 @@ function App() {
                   <Link to="/login" style={{ marginRight: "10px" }}>
                     login
                   </Link>
-                  <Link to="/join">join</Link>
+                  <button onClick={joinToGoogle}>join</button>
                 </>
               ) : (
                 <>

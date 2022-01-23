@@ -1,10 +1,14 @@
 @charset "UTF-8";
+.com-tab-box .tab-content {
+  display: none; }
+
+/* 인풋 */
 .join-form-wrap {
   width: 100%;
   margin: 50px auto;
   max-width: 500px; }
 
-form.join-form {
+.join-form {
   width: 100%;
   margin: 0 auto; }
 
@@ -45,7 +49,6 @@ form.join-form {
   font-weight: bold;
   margin-bottom: 13px;
   margin-top: 20px;
-  color: white;
   font-size: 14px;
   font-weight: 200; }
 
@@ -101,3 +104,83 @@ form.join-form {
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px; }
+
+.join-form p {
+  color: #b93530; }
+
+.join-form button[type="submit"],
+.join-form input[type="submit"] {
+  background-color: #912925; }
+
+.join-form button[type="submit"]:hover,
+i.join-form nput[type="submit"]:hover {
+  background: #b93530; }
+
+.join-form-wrap .input-box {
+  position: relative;
+  margin-bottom: 20px; }
+
+.join-form-wrap input {
+  outline-color: #b93530; }
+
+.join-form-wrap input + .place-holder {
+  line-height: 1;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  padding: 0 4px;
+  color: #999;
+  transition: all 0.2s; }
+
+.join-form-wrap input:focus + .place-holder,
+.join-form-wrap input + .place-holder.on {
+  color: #b93530;
+  font-size: 12px;
+  top: -12px;
+  padding-bottom: 2px;
+  z-index: 10; }
+
+.join-form-wrap input:focus + .place-holder span,
+.join-form-wrap input + .place-holder.on span {
+  position: relative;
+  z-index: 2; }
+
+.join-form-wrap input:focus + .place-holder::after,
+.join-form-wrap input + .place-holder.on::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #fff;
+  left: 0;
+  bottom: 0; }
+
+.join-form-wrap .radio .custom-radio {
+  width: 0;
+  height: 0; }
+
+.join-form-wrap .radio .custom-radio + label {
+  color: #666;
+  height: 44px;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  flex: 1;
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 5px; }
+
+.join-form-wrap .radio .custom-radio + label:last-child {
+  margin-right: 0; }
+
+.join-form-wrap .radio .custom-radio:checked + label {
+  background-color: #b93530;
+  color: #fff;
+  border-color: #b93530;
+  font-weight: 600; }

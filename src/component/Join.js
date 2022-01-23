@@ -12,7 +12,6 @@ function Join() {
   const password = useRef();
   password.current = watch("password");
   const onSubmit = async (data) => {
-    data.part == 1 && alert('부서를 선택해 주세요')
     try {
       setLoading(true);
       let createdUser = await firebase
@@ -57,9 +56,6 @@ function Join() {
   const onInputEmail = (e) => {
     setInputEmail(e.target.value);
   };
-  const onInputPhone = (e) => {
-    setInputPhone(e.target.value);
-  };
   const onInputPw = (e) => {
     setInputPw(e.target.value);
   };
@@ -75,18 +71,18 @@ function Join() {
             <input
               type="text"
               onChange={onInputName}
-              name="name"
-              id="name"
+              name="nick"
+              id="nick"
               ref={register({ required: true })}
             />
             <label
-              htmlFor="name"
+              htmlFor="nick"
               className={"place-holder " + (InputName && "on")}
             >
-              <span>이름</span>
+              <span>닉네임</span>
             </label>
-            {errors.name && errors.name.type === "required" && (
-              <p>이름을 입력해 주세요</p>
+            {errors.nick && errors.nick.type === "required" && (
+              <p>닉네임을 입력해 주세요</p>
             )}
           </div>
           <div className="input-box">
@@ -103,7 +99,17 @@ function Join() {
             >
               <span>이메일</span>
             </label>
-            <span style={{color:"#888",fontSize:"12px",display:"block",paddingLeft:"10px",marginTop:"3px"}}>※ 실제 사용중인 이메일로 가입 바랍니다(비밀번호 재설정 시 필요)</span>
+            <span
+              style={{
+                color: "#888",
+                fontSize: "12px",
+                display: "block",
+                paddingLeft: "10px",
+                marginTop: "3px",
+              }}
+            >
+              ※ 실제 사용중인 이메일로 가입 바랍니다(비밀번호 재설정 시 필요)
+            </span>
             {errors.email && errors.email.type === "required" && (
               <p>이메일을 입력해 주세요</p>
             )}
@@ -111,62 +117,7 @@ function Join() {
               <p>이메일 형식이 맞지 않습니다.</p>
             )}
           </div>
-          <div className="input-box">
-            <input
-              name="call_number"
-              type="number"
-              id="call_number"
-              onChange={onInputPhone}
-              ref={register({ required: true, minLength: 11, maxLength:11 })}
-            />
-            <label
-              htmlFor="call_number"
-              className={"place-holder " + (InputPhone && "on")}
-            >
-              <span>휴대전화</span>
-            </label>
-            <span style={{color:"#888",fontSize:"12px",display:"block",paddingLeft:"10px",marginTop:"3px"}}>※ 실제 사용중인 휴대전화로 가입 바랍니다.(카카오톡 연동기능에 필요)</span>
-            {errors.call_number && errors.call_number.type === "required" && (
-              <p>휴대전화 번호를 입력해 주세요</p>
-            )}
-            {errors.call_number && errors.call_number.type === "minLength" && (
-              <p>자리수를 확인해 주세요</p>
-            )}
-            {errors.call_number && errors.call_number.type === "maxLength" && (
-              <p>자리수를 확인해 주세요</p>
-            )}
-          </div>
-          <div className="input-box radio">
-            <div className="flex-box">
-              <input type="radio" className="custom-radio" name="sosok" id="sosok1" value="1" ref={register({ required: true })} />
-              <label for="sosok1">미트리</label>
-              <input type="radio" className="custom-radio" name="sosok" id="sosok2" value="2" ref={register({ required: true })} />
-              <label for="sosok2">푸드킹</label>
-              <input type="radio" className="custom-radio" name="sosok" id="sosok3" value="3" ref={register({ required: true })} />
-              <label for="sosok3">계약직</label>
-            </div>
-            {errors.sosok && <p>소속을 선택해 주세요</p>}
-          </div>
-          <div className="input-box">
-            <select
-              name="part"
-              defaultValue="1"
-              ref={register({ required: true })}
-            >
-              <option value="1" disabled hidden>
-                부서
-              </option>
-              <option value="R&D">R&D</option>
-              <option value="전략기획부">전략기획부</option>
-              <option value="영업지원부">영업지원부</option>
-              <option value="인사재경부">인사재경부</option>
-              <option value="IT개발부">IT개발부</option>
-              <option value="푸드킹">푸드킹</option>
-              <option value="물류부">물류부</option>
-              <option value="카페부">카페부</option>
-            </select>
-            {errors.part && <p>부서를 선택해 주세요</p>}
-          </div>
+
           <div className="input-box">
             <input
               type="password"

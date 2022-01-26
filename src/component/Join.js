@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import firebase from "../firebase";
+import firebase from "firebase";
 
 function Join() {
   const { register, handleSubmit, watch, errors } = useForm({

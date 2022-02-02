@@ -21,19 +21,19 @@ $bd-color: #e2e2e2; //보더컬러
   flex-direction: $d;
 }
 
-@mixin after($width, $height) {
+@mixin after($w, $h) {
   content: "";
   display: inline-block;
   position: absolute;
-  width: $width;
-  height: $height;
+  width: $w;
+  height: $h;
 }
-@mixin before($width, $height) {
+@mixin before($w, $h) {
   content: "";
   display: inline-block;
   position: absolute;
-  width: $width;
-  height: $height;
+  width: $w;
+  height: $h;
   @content;
 }
 

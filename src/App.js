@@ -9,6 +9,9 @@ import "./App.css";
 import Login from "./component/Login";
 import Nav from "./component/Nav";
 import Buy from "./component/Buy";
+import Admin from "./component/Admin";
+import List from "./component/List";
+import Info from "./component/Info";
 
 function App() {
   const userInfo = useSelector((state) => state.user.currentUser);
@@ -58,12 +61,15 @@ function App() {
               <span className="line bot"></span>
             </button>
           )}
-          <Nav onTotal={onTotal} total={total} onLogout={onLogout} />
         </header>
+        <Nav onTotal={onTotal} total={total} onLogout={onLogout} />
         <section className="content_box">
           <Switch>
             <Route exact path="/login" component={Login} />
+            <Route exact path="/list" component={List} />
             <Route exact path="/buy" component={Buy} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/info" component={Info} />
           </Switch>
         </section>
       </div>

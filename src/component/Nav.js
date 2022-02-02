@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button } from "antd";
 import * as fiIcon from "react-icons/fi";
 
 function Nav({ onTotal, total, onLogout }) {
@@ -26,20 +25,30 @@ function Nav({ onTotal, total, onLogout }) {
                   fontSize: "1rem",
                   position: "relative",
                   top: "1px",
-                  marginLeft: "7px",
+                  marginLeft: "10px",
                   cursor: "pointer",
                 }}
               />
             </div>
             <ul className="menu">
               <li ref={(el) => (nav.current[1] = el)}>
+                <Link to="/list" onClick={onTotal}>
+                  목록
+                </Link>
+              </li>
+              <li ref={(el) => (nav.current[2] = el)}>
+                <Link to="/admin" onClick={onTotal}>
+                  설정
+                </Link>
+              </li>
+              <li ref={(el) => (nav.current[3] = el)}>
                 <Link to="/buy" onClick={onTotal}>
                   구매등록
                 </Link>
               </li>
-              <li ref={(el) => (nav.current[2] = el)}>
-                <Link to="/login" onClick={onTotal}>
-                  login
+              <li ref={(el) => (nav.current[4] = el)}>
+                <Link to="/info" onClick={onTotal}>
+                  내역
                 </Link>
               </li>
             </ul>

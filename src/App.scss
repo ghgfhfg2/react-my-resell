@@ -7,8 +7,17 @@ html {
     font-size: 12px;
   }
 }
-.ant-layout-footer {
+
+button {
+  border: none;
+  background: none;
+  &.basic {
+    border: 1px solid #333;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+  }
 }
+
 .ant-layout {
   background-color: #fff;
 }
@@ -18,7 +27,25 @@ html {
 }
 
 .flex_box {
-  @include flex();
+  @include flex($a: center);
+  &.j_bet {
+    justify-content: space-between;
+  }
+  &.j_cen {
+    justify-content: center;
+  }
+  &.j_end {
+    justify-content: flex-end;
+  }
+  &.a_start {
+    align-items: flex-start;
+  }
+  &.a_end {
+    align-items: flex-end;
+  }
+  &.d_col {
+    flex-direction: column;
+  }
 }
 
 .content_box {
@@ -52,6 +79,8 @@ header.header {
   height: 60px;
   padding: 0 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100;
   @include flex();
   .total_menu {
     width: 20px;
@@ -103,27 +132,42 @@ header.header {
 .nav_wrap {
   position: fixed;
   left: 0;
-  top: 0;
-  padding: 60px 0 0 0;
-  z-index: 100;
+  top: 60px;
+  z-index: 10;
+  transition: 0.2s 0.2s;
+  padding: 10px 2rem 0 0;
+  transform: translateX(-100%);
+  &::before {
+    @include before($w: calc(100% + 1rem), $h: 100%) {
+      left: -1rem;
+      top: 0;
+      transition: 0.2s;
+      transform: translateX(-100%);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.3)
+      );
+    }
+  }
   @include flex($d: column, $a: flex-start);
   .top {
+    font-weight: 500;
     margin-bottom: 10px;
     transform: translateX(-100%);
     transition: 0.3s;
     @include flex();
   }
   li {
-    @include flex();
-    border: 1px solid #555;
-    background-color: #fff;
-    border-radius: 5px;
-    height: 36px;
     margin-bottom: 0.7rem;
     transform: translateX(-100%);
     transition: 0.3s;
     a {
-      display: block;
+      @include flex($j: center);
+      border: 1px solid #555;
+      background-color: #fff;
+      border-radius: 5px;
+      height: 36px;
       padding: 0 10px;
       color: #333;
     }
@@ -147,11 +191,51 @@ header.header {
     }
   }
   &.on {
+    left: 1rem;
+    transform: translateX(0);
+    &::before {
+      transform: translateX(0);
+    }
     .top {
-      transform: translateX(10px);
+      transform: translateX(0);
     }
     li {
-      transform: translateX(10px);
+      transform: translateX(0);
+    }
+  }
+}
+
+//prod_list
+.prod_list {
+  width: 100%;
+  @include flex($d: column, $a: flex-start);
+  li {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid $bd-color;
+    @include flex();
+    .cate {
+      color: #888;
+      font-size: 12px;
+      margin-right: 1.5rem;
+    }
+    .name_box {
+      @include flex($d: column, $a: flex-start);
+      .name {
+        font-weight: bold;
+      }
+      .option {
+        color: #888;
+        font-size: 12px;
+        line-height: 1;
+      }
+    }
+    .price {
+      margin-left: auto;
+      margin-right: 1.5rem;
+    }
+    button {
     }
   }
 }

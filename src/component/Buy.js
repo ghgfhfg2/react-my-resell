@@ -6,8 +6,8 @@ import uuid from "react-uuid";
 import { getFormatDate } from "./CommonFunc";
 
 const layout = {
-  labelCol: { span: 2 },
-  wrapperCol: { span: 22 },
+  labelCol: { span: 3 },
+  wrapperCol: { span: 21 },
 };
 
 function Buy() {
@@ -17,19 +17,21 @@ function Buy() {
   const [category, setCategory] = useState([]);
   useEffect(() => {
     let arr = [];
+    userInfo &&
     db.ref(`category/${userInfo.uid}`).once("value", (data) => {
       data.forEach((el) => {
         arr.push(el.val());
       });
       setCategory(arr);
     });
-  }, []);
+  }, [userInfo]);
 
   const onFinish = (values) => {
     let uid = uuid();
     values.buy_date = getFormatDate(values.buy_date._d);
     db.ref(`prod_list/${userInfo.uid}/${uid}`).update({
       ...values,
+      step:1
     });
 
     db.ref(`user/${userInfo.uid}/buy_price`).transaction((pre) => {

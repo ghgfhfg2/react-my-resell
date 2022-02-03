@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import firebase from "../firebase";
 import SellPop from "./SellPop";
+import Loading from "./Loading";
+import { commaNumber } from "./CommonFunc";
 import { Empty } from "antd";
 
 function List() {
   const userInfo = useSelector((state) => state.user.currentUser);
   const db = firebase.database();
 
-  const [prodList, setProdList] = useState();
+  const [prodList, setProdList] = useState('');
   useEffect(() => {
     let arr = [];
+    userInfo &&
     db.ref(`prod_list/${userInfo.uid}`).on("value", (data) => {
       data.forEach((el) => {
         arr.push({
@@ -22,9 +25,9 @@ function List() {
       setProdList(arr);
     });
     return () => {
-      db.ref(`prod_list/${userInfo.uid}`).off();
+      userInfo && db.ref(`prod_list/${userInfo.uid}`).off();
     };
-  }, []);
+  }, [userInfo]);
 
   const [sellPop, setSellPop] = useState(false);
   const [prodUid, setProdUid] = useState();
@@ -35,18 +38,25 @@ function List() {
     setProdPrice(price);
   };
 
+  const onClose = () => {
+    setSellPop(false);
+  };
+
   return (
     <>
+      {prodList ? (
       <ul className="prod_list">
-        {prodList && prodList.length > 0 ? (
-          prodList.map((el, idx) => (
+          {prodList.length > 0 ? (prodList.map((el, idx) => (
             <li key={idx}>
-              <span className="cate">{el.prod_cate}</span>
+              <div className="top">
+                <span className="cate">{el.prod_cate}</span>
+                <span className="date">구매일 : {el.buy_date.full_}</span>
+              </div>
               <div className="name_box">
                 <span className="name">{el.prod_name}</span>
                 <span className="option">{el.prod_option}</span>
               </div>
-              <span className="price">{el.prod_price}</span>
+              <span className="price">{commaNumber(el.prod_price)}원</span>
               <button
                 type="button"
                 className="basic"
@@ -57,14 +67,19 @@ function List() {
                 판매
               </button>
             </li>
-          ))
-        ) : (
-          <li>
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-          </li>
-        )}
+          ))):
+          (
+            <li className="flex_box j_cen">
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            </li>
+          )
+          }
       </ul>
-      {sellPop && <SellPop prodUid={prodUid} prodPrice={prodPrice} />}
+      ) : (
+        <Loading />
+        )
+      }
+      <SellPop prodUid={prodUid} prodPrice={prodPrice} visible={sellPop} onClose={onClose} />
     </>
   );
 }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, InputNumber, Select, Button, DatePicker } from "antd";
+import React, { useState, useEffect, useRef } from "react";
+import { Form, Input, InputNumber, Select, Button, DatePicker, message } from "antd";
 import { useSelector } from "react-redux";
 import firebase from "firebase";
 import uuid from "react-uuid";
+import moment from "moment";
 import { getFormatDate } from "./CommonFunc";
 
 const layout = {
@@ -13,6 +14,16 @@ const layout = {
 function Buy() {
   const userInfo = useSelector((state) => state.user.currentUser);
   const db = firebase.database();
+  const form = useRef();
+
+  const formInit = () => {
+    form.current.setFieldsValue({
+      prod_name: undefined,
+      prod_option: undefined,
+      prod_cate: undefined,
+      prod_price: undefined
+    })
+  }
 
   const [category, setCategory] = useState([]);
   useEffect(() => {
@@ -28,19 +39,21 @@ function Buy() {
 
   const onFinish = (values) => {
     let uid = uuid();
+    values.buy_date = values.buy_date ? values.buy_date : moment();
     values.buy_date = getFormatDate(values.buy_date._d);
     db.ref(`prod_list/${userInfo.uid}/${uid}`).update({
       ...values,
       step:1
     });
-
     db.ref(`user/${userInfo.uid}/buy_price`).transaction((pre) => {
       return pre + values.prod_price;
     });
+    message.success('등록되었습니다.')
+    formInit();
   };
   return (
     <>
-      <Form {...layout} onFinish={onFinish}>
+      <Form ref={form} {...layout} onFinish={onFinish}>
         <Form.Item label="상품명" name="prod_name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
@@ -67,7 +80,7 @@ function Buy() {
           rules={[{ required: true }]}
         >
           <InputNumber
-            style={{ width: "100%", maxWidth: "300px" }}
+            style={{ width: "100%", maxWidth: "400px" }}
             controls={false}
             min={0}
             formatter={(value) =>
@@ -75,10 +88,14 @@ function Buy() {
             }
           />
         </Form.Item>
-        <Form.Item label="구매일" name="buy_date" rules={[{ required: true }]}>
-          <DatePicker />
+        <Form.Item label="구매일" name="buy_date">
+          <DatePicker 
+            style={{ width: "100%", maxWidth: "400px" }}
+            defaultValue={moment()}
+            format={`YYYY-MM-DD`}
+          />
         </Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+        <Button type="primary" htmlType="submit" style={{ width: "100%",marginTop:"15px" }}>
           등록
         </Button>
       </Form>

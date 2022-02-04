@@ -11,14 +11,20 @@ html {
   html {
     font-size: 12px; } }
 
+@media (max-width: 760px) {
+  /* iOS only */
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available; } }
+
 button {
   border: none;
   background: none; }
 
 button.basic {
-  border: 1px solid #333;
+  background-color: #0e62b1;
   border-radius: 0.4rem;
-  padding: 0.5rem 1rem; }
+  padding: 0.5rem 1rem;
+  color: #fff; }
 
 h3.title {
   display: flex;
@@ -69,7 +75,7 @@ h3.title svg {
 .content_box {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 1rem; }
+  padding: 1rem; }
 
 .loading {
   display: flex;
@@ -93,6 +99,46 @@ h3.title svg {
     padding-bottom: 0; }
   .ant-form-item {
     margin-bottom: 1rem; } }
+
+.com_tab {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 1.5rem;
+  position: relative; }
+
+.com_tab li {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 34px;
+  border-bottom: 2px solid #ddd; }
+
+.com_tab li.on {
+  border-bottom: 2px solid #0e62b1;
+  font-weight: 700; }
+
+.btn_buy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background: #0e62b1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem; }
+
+.btn_buy:focus, .btn_buy:hover, .btn_buy:active {
+  color: #fff; }
 
 .title_box {
   text-align: center;
@@ -212,10 +258,13 @@ header.header .total_menu.on .mid {
   flex-direction: row;
   border: 1px solid #555;
   background-color: #fff;
-  border-radius: 5px;
-  height: 36px;
+  border-radius: 4px;
+  height: 34px;
   padding: 0 10px;
-  color: #333; }
+  color: #333;
+  font-size: 13px;
+  position: relative;
+  overflow: hidden; }
 
 .nav_wrap li.ani_0 {
   transition-delay: 0; }
@@ -292,8 +341,11 @@ header.header .total_menu.on .mid {
   line-height: 1; }
 
 .prod_list li .price {
-  margin-left: auto;
-  margin-right: 1.5rem; }
+  font-family: "Barlow";
+  margin-left: auto; }
+
+.prod_list li button {
+  margin-left: 1.5rem; }
 
 .bg_box {
   position: fixed;
@@ -303,11 +355,8 @@ header.header .total_menu.on .mid {
   top: 0;
   background: rgba(0, 0, 0, 0.3); }
 
-.sell_pop {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); }
+.sell_pop .btn {
+  width: 100%; }
 
 .cate_list {
   display: flex;
@@ -336,3 +385,39 @@ header.header .total_menu.on .mid {
 .cate_list li button svg {
   font-size: 14px;
   margin-right: 2px; }
+
+.income_wrapper .buy_sell_box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column; }
+
+.income_wrapper .buy_sell_box dl {
+  flex: 1;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e2e2e2;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row; }
+
+.income_wrapper .buy_sell_box dl dt {
+  font-weight: bold; }
+
+.income_wrapper .buy_sell_box dl dd {
+  font-size: 18px;
+  font-family: 'Barlow';
+  font-weight: 500;
+  margin-bottom: 0; }
+
+.income_wrapper .buy_sell_box dl dd .txt {
+  font-size: 14px; }
+
+.income_wrapper .buy_sell_box dl .plus {
+  color: #e72828; }
+
+.income_wrapper .buy_sell_box dl .minus {
+  color: #4160eb; }

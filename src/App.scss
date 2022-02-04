@@ -8,13 +8,21 @@ html {
   }
 }
 
+@include mobile(){
+  /* iOS only */ 
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+}
+
 button {
   border: none;
   background: none;
   &.basic {
-    border: 1px solid #333;
+    background-color: $p-color;
     border-radius: 0.4rem;
     padding: 0.5rem 1rem;
+    color: #fff;
   }
 }
 
@@ -61,7 +69,7 @@ h3.title{
 .content_box {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1rem;
 }
 
 .loading{
@@ -81,6 +89,36 @@ h3.title{
     margin-bottom: 1rem;
   }
 }
+
+.com_tab{
+  @include flex();
+  margin-bottom: 1.5rem;
+  position: relative;
+  li{
+    flex:1;
+    @include flex($j:center);
+    height: 34px;
+    border-bottom: 2px solid #ddd;
+    &.on{border-bottom: 2px solid $p-color;font-weight: 700;}
+  }
+}
+
+
+// 고정 등록버튼
+.btn_buy{
+  @include flex($j:center);
+  background:$p-color;
+  border-radius: 50%;
+  width:40px;height: 40px;
+  font-size: 24px;
+  color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  position: fixed;right: 1rem;bottom: 2rem;
+  &:focus,
+  &:hover,
+  &:active{color: #fff;}
+}
+
 
 //타이틀
 .title_box {
@@ -193,10 +231,13 @@ header.header {
       @include flex($j: center);
       border: 1px solid #555;
       background-color: #fff;
-      border-radius: 5px;
-      height: 36px;
+      border-radius: 4px;
+      height: 34px;
       padding: 0 10px;
       color: #333;
+      font-size: 13px;
+      position: relative;
+      overflow: hidden;
     }
     &.ani_0 {
       transition-delay: 0;
@@ -251,7 +292,6 @@ header.header {
       font-size: 12px;
       @include flex($j:space-between);
     }
-
     .name_box {
       @include flex($d: column, $a: flex-start);
       .name {
@@ -264,11 +304,13 @@ header.header {
       }
     }
     .price {
+      font-family: $font;
       margin-left: auto;
-      margin-right: 1.5rem;
     }
-    button {
+    button{
+      margin-left: 1.5rem;
     }
+    
   }
 }
 
@@ -278,9 +320,7 @@ header.header {
 }
 
 .sell_pop{
-  position: absolute;
-  left:50%;top:50%;
-  transform: translate(-50%,-50%)
+  .btn{width: 100%}
 }
 
 .cate_list{
@@ -296,6 +336,28 @@ header.header {
       @include flex();
       font-size: 12px;
       svg{font-size: 14px;margin-right: 2px;}
+    }
+  }
+}
+
+//수익
+.income_wrapper{
+  .buy_sell_box{
+    @include flex($d:column);  
+    dl{flex:1;
+      width:100%;
+      margin-bottom: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid $bd-color;
+      position: relative;
+      @include flex($j:space-between);
+      dt{font-weight: bold;}
+      dd{font-size: 18px;font-family: 'Barlow';font-weight: 500;margin-bottom: 0;
+        .txt{font-size: 14px;}
+      }
+      .plus{color: rgb(231, 40, 40);}
+      .minus{color: rgb(65, 96, 235);}
+      
     }
   }
 }

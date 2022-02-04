@@ -1,13 +1,28 @@
+import React, { useRef } from "react";
 import { Form, InputNumber, Button, DatePicker, Drawer } from "antd";
 import { useSelector } from "react-redux";
 import firebase from "../firebase";
 import { getFormatDate } from "./CommonFunc";
+import moment from "moment"
+import uuid from "react-uuid"
 
 function SellPop({ prodUid, prodPrice, visible, onClose }) {
   const userInfo = useSelector((state) => state.user.currentUser);
   const db = firebase.database();
+  const form = useRef();
+
+  const formInit = () => {
+    form.current.setFieldsValue({
+      prod_price: undefined
+    })
+  }
   const onFinish = (values) => {
+    values.sell_date = values.sell_date ? values.sell_date : moment();
     values.sell_date = getFormatDate(values.sell_date._d);
+    let date = {
+      full_: values.sell_date.full_,
+      time : values.sell_date.timestamp
+    };
     db.ref(`prod_list/${userInfo.uid}/${prodUid}`).update({
       sell_date: values.sell_date,
       sell_price: values.prod_price,
@@ -28,18 +43,33 @@ function SellPop({ prodUid, prodPrice, visible, onClose }) {
         return pre - distance;
       }
     });
+
+    let distance =  values.prod_price - prodPrice
+    db.ref(`user/${userInfo.uid}/income_list/${uuid()}`).update({
+      income:distance,
+      date: date.full_,
+      time: date.time
+    })
+    formInit();
+    onClose();
   };
   return (
     <>
-      <Drawer placement="bottom" visible={visible} onClose={onClose}>
-        <Form onFinish={onFinish}>
+      <Drawer
+       placement="bottom" 
+       visible={visible} 
+       onClose={onClose} 
+       closable={false}
+       height={165}
+      >
+        <Form ref={form} onFinish={onFinish} className="sell_pop">
           <Form.Item
-            label="상품가격"
             name="prod_price"
             rules={[{ required: true }]}
           >
             <InputNumber
-              style={{ width: "100%", maxWidth: "300px" }}
+              placeholder="상품가격"
+              style={{ width: "100%" }}
               controls={false}
               min={0}
               formatter={(value) =>
@@ -47,10 +77,15 @@ function SellPop({ prodUid, prodPrice, visible, onClose }) {
               }
             />
           </Form.Item>
-          <Form.Item label="판매일" name="sell_date" rules={[{ required: true }]}>
-            <DatePicker />
+          <Form.Item name="sell_date">
+            <DatePicker
+             placeholder="판매일" 
+             style={{ width: "100%" }} 
+             defaultValue={moment()}
+             format={`YYYY-MM-DD`}
+            />
           </Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="btn">
             판매
           </Button>
         </Form>

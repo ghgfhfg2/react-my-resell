@@ -48,7 +48,7 @@ function Nav({ onTotal, total, onLogout }) {
               </li>
               <li ref={(el) => (nav.current[4] = el)}>
                 <Link to="/info" onClick={onTotal}>
-                  내역
+                  수익
                 </Link>
               </li>
             </ul>

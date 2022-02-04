@@ -3,7 +3,7 @@ import { Route, Switch, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/actions/user_action";
 import firebase from "./firebase";
-import * as antIcon from "react-icons/ai";
+import * as biIcon from "react-icons/bi";
 import "./custom_antd.less";
 import "./App.css";
 import Login from "./component/Login";
@@ -72,6 +72,11 @@ function App() {
             <Route exact path="/info" component={Info} />
           </Switch>
         </section>
+        {userInfo && (
+          <Link to="/buy" className="btn_buy">
+            <biIcon.BiListPlus />
+          </Link>
+        )}
       </div>
     </>
   );

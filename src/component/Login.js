@@ -1,10 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "../firebase";
-import { Button, PageHeader } from "antd";
+import { Button } from "antd";
 import * as fcIcon from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { setUser, clearUser } from "../redux/actions/user_action";
+import { setUser } from "../redux/actions/user_action";
+import { ReactComponent as Logo } from "../img/logo.svg";
+import "../font.css";
 
 function Login() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -22,7 +24,7 @@ function Login() {
         // The signed-in user info.
         let user = result.user;
         dispatch(setUser(user));
-        history.push("/");
+        history.push("/list");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -37,13 +39,12 @@ function Login() {
   };
   return (
     <>
-      {/* <PageHeader
-        className="title_box"
-        onBack={() => history.goBack()}
-        title="Login"
-      /> */}
       <div className="login_box">
-        <Button className="flex_box" onClick={joinToGoogle}>
+        <span className="tit font_gow">나의 리셀 장부</span>
+        <figure className="logo">
+          <Logo />
+        </figure>
+        <Button className="flex_box btn_login" onClick={joinToGoogle}>
           <fcIcon.FcGoogle
             style={{
               position: "relative",
@@ -52,8 +53,9 @@ function Login() {
               marginRight: "8px",
             }}
           />
-          google로 로그인하기
+          google 로그인
         </Button>
+        <span className="copy">Copyrightⓒ2022 sooya_dev</span>
       </div>
     </>
   );

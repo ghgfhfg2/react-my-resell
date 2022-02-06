@@ -12,6 +12,7 @@ import Buy from "./component/Buy";
 import Admin from "./component/Admin";
 import List from "./component/List";
 import Info from "./component/Info";
+import { ReactComponent as Logo } from "./img/logo.svg";
 
 function App() {
   const userInfo = useSelector((state) => state.user.currentUser);
@@ -49,8 +50,11 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <header className="header">
-          {userInfo && (
+        {userInfo && (
+          <header className="header">
+            <figure className="logo">
+              <Logo />
+            </figure>
             <button
               type="button"
               className={total ? `total_menu on` : `total_menu`}
@@ -60,18 +64,20 @@ function App() {
               <span className="line mid"></span>
               <span className="line bot"></span>
             </button>
-          )}
-        </header>
+          </header>
+        )}
         <Nav onTotal={onTotal} total={total} onLogout={onLogout} />
-        <section className="content_box">
-          <Switch>
+        <Switch>
+          <>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/list" component={List} />
-            <Route exact path="/buy" component={Buy} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/info" component={Info} />
-          </Switch>
-        </section>
+            <section className="content_box">
+              <Route exact path="/list" component={List} />
+              <Route exact path="/buy" component={Buy} />
+              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/info" component={Info} />
+            </section>
+          </>
+        </Switch>
         {userInfo && (
           <Link to="/buy" className="btn_buy">
             <biIcon.BiListPlus />

@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.10.3",
     "axios": "^0.21.1",
+    "chart.js": "^3.7.0",
     "craco-antd": "^1.19.0",
     "craco-less": "^1.17.1",
     "firebase": "^8.7.1",

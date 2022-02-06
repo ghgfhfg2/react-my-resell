@@ -8,8 +8,8 @@ html {
   }
 }
 
-@include mobile(){
-  /* iOS only */ 
+@include mobile() {
+  /* iOS only */
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
   }
@@ -26,14 +26,17 @@ button {
   }
 }
 
-h3.title{
+h3.title {
   @include flex();
   font-size: 15px;
   font-weight: bold;
   padding-bottom: 5px;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #888;
-  svg{margin-right: 3px;font-size: 18px;}
+  svg {
+    margin-right: 3px;
+    font-size: 18px;
+  }
 }
 
 .ant-layout {
@@ -72,53 +75,63 @@ h3.title{
   padding: 1rem;
 }
 
-.loading{
-  @include flex($j:center);
+.loading {
+  @include flex($j: center);
 }
 
-.has_btn_input{
+.has_btn_input {
   @include flex();
-  .ant-form-item{flex:1;margin-bottom: 0;margin-right: 5px;}
+  .ant-form-item {
+    flex: 1;
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
 }
 
-@include mobile(){
-.ant-form-item .ant-form-item-label{
-  padding-bottom: 0;
-}
-.ant-form-item{
+@include mobile() {
+  .ant-form-item .ant-form-item-label {
+    padding-bottom: 0;
+  }
+  .ant-form-item {
     margin-bottom: 1rem;
   }
 }
 
-.com_tab{
+.com_tab {
   @include flex();
   margin-bottom: 1.5rem;
   position: relative;
-  li{
-    flex:1;
-    @include flex($j:center);
+  li {
+    flex: 1;
+    @include flex($j: center);
     height: 34px;
     border-bottom: 2px solid #ddd;
-    &.on{border-bottom: 2px solid $p-color;font-weight: 700;}
+    &.on {
+      border-bottom: 2px solid $p-color;
+      font-weight: 700;
+    }
   }
 }
 
-
 // 고정 등록버튼
-.btn_buy{
-  @include flex($j:center);
-  background:$p-color;
+.btn_buy {
+  @include flex($j: center);
+  background: $p-color;
   border-radius: 50%;
-  width:40px;height: 40px;
+  width: 40px;
+  height: 40px;
   font-size: 24px;
   color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  position: fixed;right: 1rem;bottom: 2rem;
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem;
   &:focus,
   &:hover,
-  &:active{color: #fff;}
+  &:active {
+    color: #fff;
+  }
 }
-
 
 //타이틀
 .title_box {
@@ -135,7 +148,45 @@ h3.title{
 .login_box {
   @include flex($d: column, $j: center);
   flex: 1;
-  min-height: 30vh;
+  height: 100vh;
+  padding-bottom: 30vh;
+  background-color: #fff;
+  border: 4px solid #111;
+  .tit {
+    font-size: 15px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    opacity: 0;
+    animation: fadeIn 0.4s both;
+  }
+  .logo {
+    width: 200px;
+    height: 32px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeIn 0.4s 0.6s both;
+  }
+  .btn_login {
+    border: 1px solid #ddd;
+    font-weight: bold;
+    height: 40px;
+    opacity: 0;
+    animation: fadeIn 0.4s 0.6s both;
+  }
+  .copy {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #888;
+    font-size: 12px;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 //header
@@ -147,6 +198,13 @@ header.header {
   position: relative;
   z-index: 100;
   @include flex();
+  .logo {
+    width: 120px;
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    margin-left: -60px;
+  }
   .total_menu {
     width: 20px;
     height: 20px;
@@ -285,12 +343,12 @@ header.header {
     flex-wrap: wrap;
     border-radius: 0.5rem;
     @include flex();
-    .top{
+    .top {
       width: 100%;
       margin-bottom: 0.8rem;
       line-height: 1;
       font-size: 12px;
-      @include flex($j:space-between);
+      @include flex($j: space-between);
     }
     .name_box {
       @include flex($d: column, $a: flex-start);
@@ -307,57 +365,77 @@ header.header {
       font-family: $font;
       margin-left: auto;
     }
-    button{
+    button {
       margin-left: 1.5rem;
     }
-    
   }
 }
 
-.bg_box{position: fixed;
-  width: 100%;height: 100vh;
-  left:0;top:0;background: rgba(0, 0, 0, 0.3);
+.bg_box {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.sell_pop{
-  .btn{width: 100%}
+.sell_pop {
+  .btn {
+    width: 100%;
+  }
 }
 
-.cate_list{
+.cate_list {
   @include flex();
   flex-wrap: wrap;
-  li{
+  li {
     width: 100%;
-    padding:0.5rem 0.8rem;
+    padding: 0.5rem 0.8rem;
     margin-bottom: 8px;
     border-bottom: 1px solid $bd-color;
-    @include flex($j:space-between);
-    button{
+    @include flex($j: space-between);
+    button {
       @include flex();
       font-size: 12px;
-      svg{font-size: 14px;margin-right: 2px;}
+      svg {
+        font-size: 14px;
+        margin-right: 2px;
+      }
     }
   }
 }
 
 //수익
-.income_wrapper{
-  .buy_sell_box{
-    @include flex($d:column);  
-    dl{flex:1;
-      width:100%;
+.income_wrapper {
+  .buy_sell_box {
+    @include flex($d: column);
+    dl {
+      flex: 1;
+      width: 100%;
       margin-bottom: 0;
       padding: 0.5rem;
       border-bottom: 1px solid $bd-color;
       position: relative;
-      @include flex($j:space-between);
-      dt{font-weight: bold;}
-      dd{font-size: 18px;font-family: 'Barlow';font-weight: 500;margin-bottom: 0;
-        .txt{font-size: 14px;}
+      @include flex($j: space-between);
+      dt {
+        font-weight: bold;
       }
-      .plus{color: rgb(231, 40, 40);}
-      .minus{color: rgb(65, 96, 235);}
-      
+      dd {
+        font-size: 18px;
+        font-family: "Barlow";
+        font-weight: 500;
+        margin-bottom: 0;
+        .txt {
+          font-size: 14px;
+        }
+      }
+      .plus {
+        color: rgb(231, 40, 40);
+      }
+      .minus {
+        color: rgb(65, 96, 235);
+      }
     }
   }
 }

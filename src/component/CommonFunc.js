@@ -95,3 +95,11 @@ export function getMax(arr, target) {
   let res = Math.min.apply(null, arr2);
   return arr[res];
 }
+
+
+//xss보안
+export const xssReplace = (str) => {
+  const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+  const strTest = regExp.test(str)
+  return strTest
+}

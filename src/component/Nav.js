@@ -31,7 +31,7 @@ function Nav({ onTotal, total, onLogout }) {
           </div>
           <ul className="menu">
             <li ref={(el) => (nav.current[1] = el)}>
-              <Link to="/list" onClick={onTotal}>
+              <Link to="/" onClick={onTotal}>
                 목록
               </Link>
             </li>

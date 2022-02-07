@@ -128,9 +128,9 @@ h3.title svg {
   flex-direction: row;
   background: #111;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
   color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -459,8 +459,13 @@ header.header .total_menu.on .mid {
 .income_wrapper .buy_sell_box dl dd .txt {
   font-size: 14px; }
 
-.income_wrapper .buy_sell_box dl .plus {
+.income_wrapper .plus {
+  font-family: "Barlow";
   color: #e72828; }
 
-.income_wrapper .buy_sell_box dl .minus {
+.income_wrapper .minus {
+  font-family: "Barlow";
   color: #4160eb; }
+
+.income_wrapper .income_tbl {
+  margin-top: 2.5rem; }

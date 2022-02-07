@@ -5,6 +5,7 @@ import firebase from "../firebase";
 import uuid from "react-uuid";
 import * as mdIcon from "react-icons/md"
 import * as riIcon from "react-icons/ri"
+import { xssReplace } from "./CommonFunc";
 
 function Admin() {
   const userInfo = useSelector((state) => state.user.currentUser);
@@ -28,6 +29,14 @@ function Admin() {
 
   const onFinish = (values) => {   
     const uid = uuid();
+    const cateTest = xssReplace(values.category_name);
+    if(cateTest){
+      message.error('카테고리에 특수문자를 포함할 수 없습니다.')
+    }
+    if(values.category_name.length > 15){
+      message.error('카테고리는 15글자 이하로 작성가능합니다')
+      return
+    }
     db.ref(`category/${userInfo.uid}/${uid}`).update({
       uid,
       name: values.category_name,

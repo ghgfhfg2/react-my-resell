@@ -15,6 +15,26 @@ import Info from "./component/Info";
 import { ReactComponent as Logo } from "./img/logo.svg";
 
 function App() {
+  let deferredInstallPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    deferredInstallPrompt = e;
+    console.log("'beforeinstallprompt' event was fired.");
+  });
+  
+  function userClickedAddToHome() {
+    deferredInstallPrompt.prompt();
+  
+    deferredInstallPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        // 유저가 홈 스크린에 어플리케이션 추가에 동의
+      } else {
+        // 유저가 홈 스크린에 어플리케이션 추가를 거부
+      }
+      deferredInstallPrompt = null;
+    });
+  }
+
   const userInfo = useSelector((state) => state.user.currentUser);
   let history = useHistory();
   let dispatch = useDispatch();
@@ -52,8 +72,11 @@ function App() {
       <div className="wrapper">
         {userInfo && (
           <header className="header">
+            
             <figure className="logo">
-              <Logo />
+              <Link to="/">
+                <Logo />
+              </Link>
             </figure>
             <button
               type="button"
@@ -71,7 +94,7 @@ function App() {
           <>
             <Route exact path="/login" component={Login} />
             <section className="content_box">
-              <Route exact path="/list" component={List} />
+              <Route exact path="/" component={List} />
               <Route exact path="/buy" component={Buy} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/info" component={Info} />

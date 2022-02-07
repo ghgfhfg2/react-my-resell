@@ -118,9 +118,9 @@ h3.title {
   @include flex($j: center);
   background: $p-color;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
   color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -430,12 +430,15 @@ header.header {
           font-size: 14px;
         }
       }
-      .plus {
-        color: rgb(231, 40, 40);
-      }
-      .minus {
-        color: rgb(65, 96, 235);
-      }
     }
   }
+  .plus {
+    font-family: "Barlow";
+    color: rgb(231, 40, 40);
+  }
+  .minus {
+    font-family: "Barlow";
+    color: rgb(65, 96, 235);
+  }
+  .income_tbl{margin-top: 2.5rem;}
 }

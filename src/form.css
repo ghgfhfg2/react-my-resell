@@ -5,7 +5,8 @@
 /* 인풋 */
 .join-form-wrap {
   width: 100%;
-  margin: 50px auto;
+  margin: 2rem auto;
+  padding: 0 2rem;
   max-width: 500px; }
 
 .join-form {
@@ -184,3 +185,17 @@ i.join-form nput[type="submit"]:hover {
   color: #fff;
   border-color: #111;
   font-weight: 600; }
+
+.join-form-wrap .btn_login {
+  cursor: pointer;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #111;
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-radius: 4px; }

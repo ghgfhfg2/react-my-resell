@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import firebase from "firebase";
+import { Link } from "react-router-dom";
+import firebase from "../firebase";
 
 function Join() {
   const { register, handleSubmit, watch, errors } = useForm({
@@ -19,20 +20,19 @@ function Join() {
         .createUserWithEmailAndPassword(data.email, data.password);
 
       await createdUser.user.updateProfile({
-        displayName: data.name,
+        email: data.email,
+        displayName: data.nick,
       });
       //Firebase 데이터베이스에 저장해주기
       await firebase.database().ref("users").child(createdUser.user.uid).set({
-        name: createdUser.user.displayName,
-        call_number: data.call_number,
+        nick: createdUser.user.displayName,
         email: data.email,
-        role: 0,
       });
+      setErrorFromSubmit("");
       setLoading(false);
     } catch (error) {
       setErrorFromSubmit(error.message);
       setTimeout(() => {
-        setErrorFromSubmit("");
         setLoading(false);
       }, 3000);
     }
@@ -46,7 +46,6 @@ function Join() {
 
   const [InputName, setInputName] = useState(false);
   const [InputEmail, setInputEmail] = useState(false);
-  const [InputPhone, setInputPhone] = useState(false);
   const [InputPw, setInputPw] = useState(false);
   const [InputPw2, setInputPw2] = useState(false);
 
@@ -73,7 +72,10 @@ function Join() {
               onChange={onInputName}
               name="nick"
               id="nick"
-              ref={register({ required: true })}
+              ref={register({
+                required: true,
+                pattern: /[가-힣a-z0-9]{3,11}$/g,
+              })}
             />
             <label
               htmlFor="nick"
@@ -83,6 +85,9 @@ function Join() {
             </label>
             {errors.nick && errors.nick.type === "required" && (
               <p>닉네임을 입력해 주세요</p>
+            )}
+            {errors.nick && errors.nick.type === "pattern" && (
+              <p>특수문자를 제외한 4~12자로 입력해 주세요</p>
             )}
           </div>
           <div className="input-box">
@@ -153,8 +158,20 @@ function Join() {
             )}
             {errorFromSubmit && <p>{errorFromSubmit}</p>}
           </div>
-          <input type="submit" value="회원가입" disabled={loading} />
+          <input
+            type="submit"
+            style={{
+              padding: "12px 10px",
+              marginTop: "30px",
+              fontSize: "16px",
+            }}
+            value="회원가입"
+            disabled={loading}
+          />
         </form>
+        <Link to="/login" className="btn_login">
+          로그인
+        </Link>
       </div>
     </>
   );

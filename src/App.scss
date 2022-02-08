@@ -72,7 +72,6 @@ h3.title {
 .content_box {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .loading {
@@ -152,6 +151,14 @@ h3.title {
   padding-bottom: 30vh;
   background-color: #fff;
   border: 4px solid #111;
+  .form_box {
+    width: 100%;
+    padding: 0 2rem;
+    max-width: 500px;
+  }
+  .ant-form-item {
+    width: 100%;
+  }
   .tit {
     font-size: 15px;
     margin-bottom: 5px;
@@ -180,6 +187,14 @@ h3.title {
     transform: translateX(-50%);
     color: #888;
     font-size: 12px;
+  }
+  .btn_join {
+    display: block;
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    @include flex($j: center);
+    border: 1px solid #111;
   }
 }
 
@@ -440,5 +455,7 @@ header.header {
     font-family: "Barlow";
     color: rgb(65, 96, 235);
   }
-  .income_tbl{margin-top: 2.5rem;}
+  .income_tbl {
+    margin-top: 2.5rem;
+  }
 }

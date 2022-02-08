@@ -6,7 +6,7 @@ import * as fiIcon from "react-icons/fi";
 function Nav({ onTotal, total, onLogout }) {
   const userInfo = useSelector((state) => state.user.currentUser);
   const nav = useRef([]);
-  if (nav) {
+  if (nav && nav.length > 0) {
     nav.current.map((el, idx) => {
       el.classList.add(`ani_${idx}`);
     });

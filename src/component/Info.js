@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import firebase from "../firebase";
 import { commaNumber } from "./CommonFunc";
 import { Table } from "antd";
-import * as mdIcon from "react-icons/md"
+import * as mdIcon from "react-icons/md";
 
 function Info() {
   const userInfo = useSelector((state) => state.user.currentUser);
@@ -26,15 +26,17 @@ function Info() {
         await db.ref(`user/${userInfo.uid}/income`).get("value")
       ).val();
       let arr = [];
-      db.ref(`user/${userInfo.uid}/income_list`).limitToLast(100).once("value", (data) => {
-        data.forEach((list) => {
-          arr.push(list.val());
+      db.ref(`user/${userInfo.uid}/income_list`)
+        .limitToLast(100)
+        .once("value", (data) => {
+          data.forEach((list) => {
+            arr.push(list.val());
+          });
+          arr.sort((a, b) => {
+            return a.time - b.time;
+          });
+          setIncomeList(arr);
         });
-        arr.sort((a, b) => {
-          return a.time - b.time;
-        });
-        setIncomeList(arr);
-      });
       let per = 0;
       if (income) {
         per = (income / buy) * 100;
@@ -51,28 +53,34 @@ function Info() {
     userInfo && getIncomePer();
   }, [userInfo]);
 
-
   const columns = [
     {
-      title: '상품명',
-      dataIndex: 'name',
-      key: 'name',
-      align: "center"
+      title: "상품명",
+      dataIndex: "name",
+      key: "name",
+      align: "center",
     },
     {
-      title: '판매일',
-      dataIndex: 'date',
-      key: 'date',
-      align: "center"
+      title: "판매일",
+      dataIndex: "date",
+      key: "date",
+      align: "center",
     },
     {
-      title: '수익금액',
-      dataIndex: 'income',
-      key: 'income',
-      align: 'right',
-      render: data => data < 0 ? <span class="minus">{commaNumber(data)}</span> : data > 0 ? <span class="plus">{commaNumber(data)}</span> : <span>0</span>
+      title: "수익금액",
+      dataIndex: "income",
+      key: "income",
+      align: "right",
+      render: (data) =>
+        data < 0 ? (
+          <span class="minus">{commaNumber(data)}</span>
+        ) : data > 0 ? (
+          <span class="plus">{commaNumber(data)}</span>
+        ) : (
+          <span>0</span>
+        ),
     },
-  ]
+  ];
 
   return (
     <>
@@ -146,15 +154,25 @@ function Info() {
           </dl>
         </div>
         <div className="income_tbl">
-          <h3 className="title"><mdIcon.MdOutlineSubtitles />판매내역
-            <span style={{fontSize:"12px",color:"#888",fontWeight:"300",marginTop:"2px",marginLeft:"5px"}}>※ 최근 100개의 내역까지 보여집니다</span>
+          <h3 className="title">
+            <mdIcon.MdOutlineSubtitles />
+            판매내역
+            <span
+              style={{
+                fontSize: "12px",
+                color: "#888",
+                fontWeight: "300",
+                marginTop: "2px",
+                marginLeft: "5px",
+              }}
+            >
+              ※ 최근 100개의 내역까지 보여집니다
+            </span>
           </h3>
-          <Table 
-            size="small"
-            dataSource={incomeList} columns={columns}
-          />
+          <div>
+            <Table size="small" dataSource={incomeList} columns={columns} />
+          </div>
         </div>
-        
       </div>
     </>
   );

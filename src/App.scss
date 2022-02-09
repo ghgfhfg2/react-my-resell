@@ -30,8 +30,9 @@ h3.title {
   @include flex();
   font-size: 15px;
   font-weight: bold;
+  padding: 0 1rem;
   padding-bottom: 5px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   border-bottom: 1px solid #888;
   svg {
     margin-right: 3px;
@@ -72,6 +73,9 @@ h3.title {
 .content_box {
   max-width: 1000px;
   margin: 0 auto;
+  &.pd {
+    padding: 1rem;
+  }
 }
 
 .loading {
@@ -98,12 +102,13 @@ h3.title {
 
 .com_tab {
   @include flex();
+  margin-top: 10px;
   margin-bottom: 1.5rem;
   position: relative;
   li {
     flex: 1;
     @include flex($j: center);
-    height: 34px;
+    height: 40px;
     border-bottom: 2px solid #ddd;
     &.on {
       border-bottom: 2px solid $p-color;
@@ -349,6 +354,7 @@ header.header {
 //prod_list
 .prod_list {
   width: 100%;
+  padding: 0 1rem;
   @include flex($d: column, $a: flex-start);
   li {
     width: 100%;
@@ -401,6 +407,15 @@ header.header {
   }
 }
 
+/* admin */
+.admin_top {
+  padding: 1rem;
+  border-bottom: 10px solid #f1f1f1;
+  .ant-form {
+    margin-bottom: 0;
+  }
+  margin-bottom: 10px;
+}
 .cate_list {
   @include flex();
   flex-wrap: wrap;
@@ -429,7 +444,7 @@ header.header {
       flex: 1;
       width: 100%;
       margin-bottom: 0;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
       border-bottom: 1px solid $bd-color;
       position: relative;
       @include flex($j: space-between);

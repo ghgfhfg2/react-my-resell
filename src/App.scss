@@ -474,3 +474,37 @@ header.header {
     margin-top: 2.5rem;
   }
 }
+
+.footer_menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
+  @include flex();
+  a {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    padding: 8px 0;
+    @include flex($d: column, $j: space-between);
+    svg {
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+    span {
+      font-size: 11px;
+    }
+    &.on {
+      font-weight: bold;
+      &::after {
+        @include after($w: 25%, $h: 2px);
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #111;
+      }
+    }
+  }
+}

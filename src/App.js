@@ -3,7 +3,6 @@ import { Route, Switch, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/actions/user_action";
 import firebase from "./firebase";
-import * as biIcon from "react-icons/bi";
 import "./custom_antd.less";
 import "./App.css";
 import Login from "./component/Login";
@@ -14,6 +13,7 @@ import List from "./component/List";
 import Info from "./component/Info";
 import Join from "./component/Join";
 import { ReactComponent as Logo } from "./img/logo.svg";
+import Footer from "./component/Footer";
 
 function App() {
   let deferredInstallPrompt = null;
@@ -102,11 +102,12 @@ function App() {
             </section>
           </>
         </Switch>
-        {userInfo && (
+        <Footer />
+        {/* {userInfo && (
           <Link to="/buy" className="btn_buy">
             <biIcon.BiListPlus />
           </Link>
-        )}
+        )} */}
       </div>
     </>
   );

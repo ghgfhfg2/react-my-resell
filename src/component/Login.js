@@ -11,7 +11,6 @@ function Login() {
   let history = useHistory();
   let dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log(values);
     firebase
       .auth()
       .signInWithEmailAndPassword(values.email, values.password)

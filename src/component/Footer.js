@@ -9,7 +9,6 @@ import {
 
 function Footer({ location }) {
   const path = location.pathname;
-  console.log(path);
   return (
     <footer className="footer_menu">
       <Link to="/" className={path === "/" ? "on" : ""}>

@@ -73,9 +73,9 @@ function Info() {
       align: "right",
       render: (data) =>
         data < 0 ? (
-          <span class="minus">{commaNumber(data)}</span>
+          <span className="minus">{commaNumber(data)}</span>
         ) : data > 0 ? (
-          <span class="plus">{commaNumber(data)}</span>
+          <span className="plus">{commaNumber(data)}</span>
         ) : (
           <span>0</span>
         ),

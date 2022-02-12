@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory, Link } from "react-router-dom";
+import { Route, Switch, useHistory, Link, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/actions/user_action";
 import firebase from "./firebase";
@@ -15,7 +15,7 @@ import Join from "./component/Join";
 import { ReactComponent as Logo } from "./img/logo.svg";
 import Footer from "./component/Footer";
 
-function App() {
+function App({ location }) {
   let deferredInstallPrompt = null;
 
   window.addEventListener("beforeinstallprompt", (e) => {
@@ -67,6 +67,13 @@ function App() {
   const onTotal = () => {
     setTotal(!total);
   };
+  const closeTotal = () => {
+    setTotal(false);
+  };
+
+  useEffect(() => {
+    closeTotal();
+  }, [location]);
 
   return (
     <>
@@ -102,7 +109,7 @@ function App() {
             </section>
           </>
         </Switch>
-        <Footer />
+        {userInfo && <Footer />}
         {/* {userInfo && (
           <Link to="/buy" className="btn_buy">
             <biIcon.BiListPlus />
@@ -113,4 +120,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

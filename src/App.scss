@@ -8,6 +8,10 @@ html {
   }
 }
 
+.wrapper {
+  padding-bottom: 60px;
+}
+
 @include mobile() {
   /* iOS only */
   @supports (-webkit-touch-callout: none) {
@@ -414,19 +418,45 @@ header.header {
   .ant-form {
     margin-bottom: 0;
   }
+  .has_btn_input .ant-form-item {
+    margin-right: 0 !important;
+  }
   margin-bottom: 10px;
+  .ant-input {
+    height: 42px;
+    border-radius: 10px;
+    border-right-width: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .ant-btn-primary {
+    height: 44px;
+    border-radius: 10px;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .ant-input:hover {
+    border-right-width: 0 !important;
+  }
+  .ant-input:focus,
+  .ant-input-focused {
+    box-shadow: none !important;
+  }
 }
 .cate_list {
   @include flex();
   flex-wrap: wrap;
   li {
     width: 100%;
-    padding: 0.5rem 0.8rem;
+    min-height: 40px;
+    padding: 5px 1rem;
     margin-bottom: 8px;
     border-bottom: 1px solid $bd-color;
     @include flex($j: space-between);
     button {
       @include flex();
+      flex-shrink: 0;
       font-size: 12px;
       svg {
         font-size: 14px;
@@ -440,6 +470,7 @@ header.header {
 .income_wrapper {
   .buy_sell_box {
     @include flex($d: column);
+    border-bottom: 10px solid #f1f1f1;
     dl {
       flex: 1;
       width: 100%;
@@ -471,12 +502,14 @@ header.header {
     color: rgb(65, 96, 235);
   }
   .income_tbl {
-    margin-top: 2.5rem;
+    margin-top: 10px;
   }
 }
 
 .footer_menu {
   position: fixed;
+  background-color: #fff;
+  z-index: 10;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -505,6 +538,55 @@ header.header {
         transform: translateX(-50%);
         background-color: #111;
       }
+    }
+  }
+}
+
+.write_form {
+  padding-top: 10px;
+  .ant-select-selector {
+    border-radius: 10px !important;
+    height: 42px !important;
+    .ant-select-selection-search-input {
+      height: 100% !important;
+    }
+    .ant-select-selection-item,
+    .ant-select-selection-placeholder {
+      line-height: 42px;
+    }
+  }
+  .ant-input-number,
+  .ant-input {
+    height: 42px;
+    border-radius: 10px;
+  }
+  .ant-input-number-input-wrap {
+    height: 100%;
+    line-height: 42px;
+  }
+  .ant-picker {
+    height: 42px;
+    border-radius: 10px;
+  }
+  .price_date_box {
+    .ant-form-item.price {
+      flex: 1;
+      margin-right: 20px;
+    }
+    .ant-input-number {
+      width: 100%;
+    }
+  }
+  .label_box {
+    margin-left: auto;
+    @include flex();
+    .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      margin-right: 5px;
+    }
+    .ant-form-item-control-input-content {
+      width: 120px;
     }
   }
 }

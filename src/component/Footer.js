@@ -1,30 +1,33 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import {
-  AiOutlineOrderedList,
-  AiOutlineDatabase,
-  AiOutlineAppstoreAdd,
-  AiOutlineBarChart,
-} from "react-icons/ai";
+import * as aiIcon from "react-icons/ai";
 
 function Footer({ location }) {
   const path = location.pathname;
   return (
     <footer className="footer_menu">
       <Link to="/" className={path === "/" ? "on" : ""}>
-        <AiOutlineOrderedList />
+        {path === "/" ? <aiIcon.AiFillTags /> : <aiIcon.AiOutlineTags />}
         <span>상품</span>
       </Link>
       <Link to="/admin" className={path === "/admin" ? "on" : ""}>
-        <AiOutlineDatabase />
+        {path === "/admin" ? (
+          <aiIcon.AiFillDatabase />
+        ) : (
+          <aiIcon.AiOutlineDatabase />
+        )}
         <span>카테고리</span>
       </Link>
       <Link to="/buy" className={path === "/buy" ? "on" : ""}>
-        <AiOutlineAppstoreAdd />
+        {path === "/buy" ? (
+          <aiIcon.AiFillFileAdd />
+        ) : (
+          <aiIcon.AiOutlineFileAdd />
+        )}
         <span>등록</span>
       </Link>
       <Link to="/info" className={path === "/info" ? "on" : ""}>
-        <AiOutlineBarChart />
+        {path === "/info" ? <aiIcon.AiFillFund /> : <aiIcon.AiOutlineFund />}
         <span>수익</span>
       </Link>
     </footer>

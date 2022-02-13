@@ -1,16 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as fiIcon from "react-icons/fi";
 
 function Nav({ onTotal, total, onLogout }) {
   const userInfo = useSelector((state) => state.user.currentUser);
-  const nav = useRef([]);
-  if (nav && nav.length > 0) {
-    nav.current.map((el, idx) => {
-      el.classList.add(`ani_${idx}`);
-    });
-  }
 
   return (
     <>
@@ -30,22 +24,22 @@ function Nav({ onTotal, total, onLogout }) {
             />
           </div>
           <ul className="menu">
-            <li ref={(el) => (nav.current[1] = el)}>
+            <li className="ani_1">
               <Link to="/" onClick={onTotal}>
                 목록
               </Link>
             </li>
-            <li ref={(el) => (nav.current[2] = el)}>
+            <li className="ani_2">
               <Link to="/admin" onClick={onTotal}>
                 카테고리등록
               </Link>
             </li>
-            <li ref={(el) => (nav.current[3] = el)}>
+            <li className="ani_3">
               <Link to="/buy" onClick={onTotal}>
                 구매등록
               </Link>
             </li>
-            <li ref={(el) => (nav.current[4] = el)}>
+            <li className="ani_4">
               <Link to="/info" onClick={onTotal}>
                 수익
               </Link>

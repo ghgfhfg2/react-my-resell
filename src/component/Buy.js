@@ -15,11 +15,6 @@ import uuid from "react-uuid";
 import moment from "moment";
 import { getFormatDate, xssReplace } from "./CommonFunc";
 
-const layout = {
-  labelCol: { span: 3 },
-  wrapperCol: { span: 21 },
-};
-
 function Buy() {
   const userInfo = useSelector((state) => state.user.currentUser);
   const db = firebase.database();
@@ -85,7 +80,6 @@ function Buy() {
         {category.length > 0 ? (
           <Form
             ref={form}
-            {...layout}
             onFinish={onFinish}
             initialValues={{
               buy_date: moment(),
@@ -93,23 +87,10 @@ function Buy() {
             validateMessages={{
               required: "${label}는(은) 필수항목 입니다.",
             }}
+            className="write_form"
           >
-            <Form.Item
-              label="상품명"
-              name="prod_name"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item label="옵션" name="prod_option">
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="카테고리"
-              name="prod_cate"
-              rules={[{ required: true }]}
-            >
-              <Select>
+            <Form.Item name="prod_cate" rules={[{ required: true }]}>
+              <Select placeholder="카테고리">
                 {category.map((el, idx) => (
                   <Select.Option key={idx} value={`${el.name}|${el.uid}`}>
                     {el.name}
@@ -117,30 +98,43 @@ function Buy() {
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item
-              label="상품가격"
-              name="prod_price"
-              rules={[{ required: true }]}
-            >
-              <InputNumber
-                style={{ width: "100%", maxWidth: "400px" }}
-                controls={false}
-                min={0}
-                formatter={(value) =>
-                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-              />
+            <Form.Item name="prod_name" rules={[{ required: true }]}>
+              <Input placeholder="상품명" />
             </Form.Item>
-            <Form.Item label="구매일" name="buy_date">
-              <DatePicker
-                style={{ width: "100%", maxWidth: "400px" }}
-                format={`YYYY-MM-DD`}
-              />
+            <Form.Item name="prod_option">
+              <Input placeholder="옵션명" />
             </Form.Item>
+            <div className="flex_box price_date_box">
+              <Form.Item
+                name="prod_price"
+                className="price"
+                rules={[{ required: true }]}
+              >
+                <InputNumber
+                  placeholder="상품가격"
+                  controls={false}
+                  min={0}
+                  formatter={(value) =>
+                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  }
+                />
+              </Form.Item>
+              <div className="label_box">
+                <span className="label">구매일</span>
+                <Form.Item name="buy_date">
+                  <DatePicker format={`YYYY-MM-DD`} />
+                </Form.Item>
+              </div>
+            </div>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "100%", marginTop: "15px" }}
+              style={{
+                width: "100%",
+                marginTop: "15px",
+                height: "46px",
+                borderRadius: "10px",
+              }}
             >
               등록
             </Button>

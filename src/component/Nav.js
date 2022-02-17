@@ -12,16 +12,10 @@ function Nav({ onTotal, total, onLogout }) {
         <nav className={total ? `nav_wrap on` : `nav_wrap`}>
           <div className="top">
             <span>{userInfo.displayName}</span>
-            <fiIcon.FiLogOut
-              onClick={onLogout}
-              style={{
-                fontSize: "1rem",
-                position: "relative",
-                top: "1px",
-                marginLeft: "10px",
-                cursor: "pointer",
-              }}
-            />
+            <button type="button" className="btn_logout">
+              <fiIcon.FiLogOut onClick={onLogout} />
+              로그아웃
+            </button>
           </div>
           <ul className="menu">
             <li className="ani_1">

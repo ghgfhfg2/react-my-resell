@@ -284,17 +284,22 @@ header.header {
   transition: 0.2s 0.2s;
   padding: 10px 2rem 0 0;
   transform: translateX(-100%);
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  z-index: 100;
   &::before {
     @include before($w: calc(100% + 1rem), $h: 100%) {
       left: -1rem;
       top: 0;
       transition: 0.2s;
       transform: translateX(-100%);
+      /*
       background: linear-gradient(
         to right,
         rgba(255, 255, 255, 1),
         rgba(255, 255, 255, 0.3)
       );
+      */
     }
   }
   @include flex($d: column, $a: flex-start);
@@ -303,7 +308,15 @@ header.header {
     margin-bottom: 10px;
     transform: translateX(-100%);
     transition: 0.3s;
-    @include flex();
+    @include flex($d: column, $a: flex-start);
+    .btn_logout {
+      font-size: 12px;
+      padding: 0;
+      margin-top: 5px;
+      svg {
+        margin-right: 5px;
+      }
+    }
   }
   li {
     margin-bottom: 0.7rem;
@@ -587,6 +600,25 @@ header.header {
     }
     .ant-form-item-control-input-content {
       width: 120px;
+    }
+  }
+}
+
+//mypage
+.mypage {
+  .profile {
+    width: 100%;
+    @include flex();
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    font-weight: 700;
+    .btn_logout {
+      margin-left: auto;
+      svg {
+        margin-right: 5px;
+        position: relative;
+        top: 1px;
+      }
     }
   }
 }

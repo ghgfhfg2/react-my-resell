@@ -14,6 +14,7 @@ import Info from "./component/Info";
 import Join from "./component/Join";
 import { ReactComponent as Logo } from "./img/logo.svg";
 import Footer from "./component/Footer";
+import Mypage from "./component/Mypage";
 
 function App({ location }) {
   let deferredInstallPrompt = null;
@@ -50,19 +51,6 @@ function App({ location }) {
     });
   }, []);
 
-  const onLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log("successful logout");
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
-
   const [total, setTotal] = useState(false);
   const onTotal = () => {
     setTotal(!total);
@@ -85,7 +73,7 @@ function App({ location }) {
                 <Logo />
               </Link>
             </figure>
-            <button
+            {/* <button
               type="button"
               className={total ? `total_menu on` : `total_menu`}
               onClick={onTotal}
@@ -93,10 +81,10 @@ function App({ location }) {
               <span className="line top"></span>
               <span className="line mid"></span>
               <span className="line bot"></span>
-            </button>
+            </button> */}
           </header>
         )}
-        <Nav onTotal={onTotal} total={total} onLogout={onLogout} />
+        {/* <Nav onTotal={onTotal} total={total} onLogout={onLogout} /> */}
         <Switch>
           <>
             <Route exact path="/login" component={Login} />
@@ -106,6 +94,7 @@ function App({ location }) {
               <Route exact path="/buy" component={Buy} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/info" component={Info} />
+              <Route exact path="/mypage" component={Mypage} />
             </section>
           </>
         </Switch>

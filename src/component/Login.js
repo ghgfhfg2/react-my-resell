@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import firebase from "../firebase";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/actions/user_action";
 import { ReactComponent as Logo } from "../img/logo.svg";
@@ -17,12 +17,18 @@ function Login() {
       .then((userCredential) => {
         // Signed in
         let user = userCredential.user;
+        message.success(`${user.displayName}님 반갑습니다 :)`);
         dispatch(setUser(user));
         history.push("/");
       })
       .catch((error) => {
         let errorCode = error.code;
-        let errorMessage = error.message;
+        if (errorCode === "auth/invalid-email") {
+          message.error("이메일 형식이 맞지 않습니다.");
+        }
+        if (errorCode === "auth/wrong-password") {
+          message.error("비밀번호가 맞지 않습니다.");
+        }
       });
   };
   return (

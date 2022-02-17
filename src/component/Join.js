@@ -1,9 +1,14 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import firebase from "../firebase";
+import { useDispatch } from "react-redux";
+import { message } from "antd";
+import { setUser } from "../redux/actions/user_action";
 
 function Join() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { register, handleSubmit, watch, errors } = useForm({
     mode: "onChange",
   });
@@ -30,6 +35,9 @@ function Join() {
       });
       setErrorFromSubmit("");
       setLoading(false);
+      dispatch(setUser(createdUser.user));
+      message.success(`${data.nick}님 반갑습니다 :)`);
+      history.push("/");
     } catch (error) {
       setErrorFromSubmit(error.message);
       setTimeout(() => {

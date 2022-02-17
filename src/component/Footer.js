@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import * as aiIcon from "react-icons/ai";
+import { RiFileUserLine, RiFileUserFill } from "react-icons/ri";
 
 function Footer({ location }) {
   const path = location.pathname;
@@ -29,6 +30,10 @@ function Footer({ location }) {
       <Link to="/info" className={path === "/info" ? "on" : ""}>
         {path === "/info" ? <aiIcon.AiFillFund /> : <aiIcon.AiOutlineFund />}
         <span>수익</span>
+      </Link>
+      <Link to="/mypage" className={path === "/mypage" ? "on" : ""}>
+        {path === "/mypage" ? <RiFileUserFill /> : <RiFileUserLine />}
+        <span>마이페이지</span>
       </Link>
     </footer>
   );

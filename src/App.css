@@ -288,6 +288,9 @@ header.header .total_menu.on .mid {
   transition: 0.2s 0.2s;
   padding: 10px 2rem 0 0;
   transform: translateX(-100%);
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  z-index: 100;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -303,7 +306,13 @@ header.header .total_menu.on .mid {
   top: 0;
   transition: 0.2s;
   transform: translateX(-100%);
-  background: linear-gradient(to right, white, rgba(255, 255, 255, 0.3)); }
+  /*
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.3)
+      );
+      */ }
 
 .nav_wrap .top {
   font-weight: 500;
@@ -312,8 +321,16 @@ header.header .total_menu.on .mid {
   transition: 0.3s;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  flex-direction: row; }
+  align-items: flex-start;
+  flex-direction: column; }
+
+.nav_wrap .top .btn_logout {
+  font-size: 12px;
+  padding: 0;
+  margin-top: 5px; }
+
+.nav_wrap .top .btn_logout svg {
+  margin-right: 5px; }
 
 .nav_wrap li {
   margin-bottom: 0.7rem;
@@ -626,3 +643,21 @@ header.header .total_menu.on .mid {
 
 .write_form .label_box .ant-form-item-control-input-content {
   width: 120px; }
+
+.mypage .profile {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem;
+  font-weight: 700; }
+
+.mypage .profile .btn_logout {
+  margin-left: auto; }
+
+.mypage .profile .btn_logout svg {
+  margin-right: 5px;
+  position: relative;
+  top: 1px; }
